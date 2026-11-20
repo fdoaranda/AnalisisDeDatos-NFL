@@ -1,0 +1,718 @@
+{
+    "metrica":  "blitz_escondido",
+    "titulo":  "BAL esconde el blitz en 20% de sus pases; la liga, en 12%",
+    "liga":  {
+                 "estimado":  0.12,
+                 "ic_inf":  0.111,
+                 "ic_sup":  0.129,
+                 "n":  8498,
+                 "metodo":  "cluster_bootstrap_partido",
+                 "nota":  null
+             },
+    "equipos":  [
+                    {
+                        "equipo":  "BAL",
+                        "posicion":  1,
+                        "tasa":  {
+                                     "estimado":  0.2,
+                                     "ic_inf":  0.139,
+                                     "ic_sup":  0.261,
+                                     "n":  276,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.08,
+                                                   "ic_inf":  0.019,
+                                                   "ic_sup":  0.141,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "IND",
+                        "posicion":  2,
+                        "tasa":  {
+                                     "estimado":  0.16,
+                                     "ic_inf":  0.098,
+                                     "ic_sup":  0.222,
+                                     "n":  226,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.04,
+                                                   "ic_inf":  -0.022,
+                                                   "ic_sup":  0.102,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "CHI",
+                        "posicion":  3,
+                        "tasa":  {
+                                     "estimado":  0.155,
+                                     "ic_inf":  0.096,
+                                     "ic_sup":  0.214,
+                                     "n":  248,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.035,
+                                                   "ic_inf":  -0.023,
+                                                   "ic_sup":  0.094,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "LV",
+                        "posicion":  4,
+                        "tasa":  {
+                                     "estimado":  0.151,
+                                     "ic_inf":  0.099,
+                                     "ic_sup":  0.203,
+                                     "n":  309,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.031,
+                                                   "ic_inf":  -0.021,
+                                                   "ic_sup":  0.083,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "LAC",
+                        "posicion":  5,
+                        "tasa":  {
+                                     "estimado":  0.151,
+                                     "ic_inf":  0.099,
+                                     "ic_sup":  0.203,
+                                     "n":  307,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.031,
+                                                   "ic_inf":  -0.021,
+                                                   "ic_sup":  0.083,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "PHI",
+                        "posicion":  6,
+                        "tasa":  {
+                                     "estimado":  0.151,
+                                     "ic_inf":  0.091,
+                                     "ic_sup":  0.211,
+                                     "n":  228,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.031,
+                                                   "ic_inf":  -0.03,
+                                                   "ic_sup":  0.091,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "DEN",
+                        "posicion":  7,
+                        "tasa":  {
+                                     "estimado":  0.144,
+                                     "ic_inf":  0.093,
+                                     "ic_sup":  0.195,
+                                     "n":  305,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.024,
+                                                   "ic_inf":  -0.028,
+                                                   "ic_sup":  0.075,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "MIA",
+                        "posicion":  8,
+                        "tasa":  {
+                                     "estimado":  0.141,
+                                     "ic_inf":  0.083,
+                                     "ic_sup":  0.199,
+                                     "n":  233,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.021,
+                                                   "ic_inf":  -0.037,
+                                                   "ic_sup":  0.079,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "NYG",
+                        "posicion":  9,
+                        "tasa":  {
+                                     "estimado":  0.139,
+                                     "ic_inf":  0.084,
+                                     "ic_sup":  0.194,
+                                     "n":  259,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.019,
+                                                   "ic_inf":  -0.036,
+                                                   "ic_sup":  0.074,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "CIN",
+                        "posicion":  10,
+                        "tasa":  {
+                                     "estimado":  0.137,
+                                     "ic_inf":  0.079,
+                                     "ic_sup":  0.195,
+                                     "n":  230,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.017,
+                                                   "ic_inf":  -0.041,
+                                                   "ic_sup":  0.074,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "NYJ",
+                        "posicion":  11,
+                        "tasa":  {
+                                     "estimado":  0.135,
+                                     "ic_inf":  0,
+                                     "ic_sup":  0.34,
+                                     "n":  18,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  "pocos datos: interpretar con cautela"
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.015,
+                                                   "ic_inf":  -0.19,
+                                                   "ic_sup":  0.22,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  "pocos datos: interpretar con cautela"
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "TB",
+                        "posicion":  12,
+                        "tasa":  {
+                                     "estimado":  0.131,
+                                     "ic_inf":  0.082,
+                                     "ic_sup":  0.18,
+                                     "n":  311,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.011,
+                                                   "ic_inf":  -0.038,
+                                                   "ic_sup":  0.06,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "BUF",
+                        "posicion":  13,
+                        "tasa":  {
+                                     "estimado":  0.131,
+                                     "ic_inf":  0.078,
+                                     "ic_sup":  0.184,
+                                     "n":  262,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.011,
+                                                   "ic_inf":  -0.042,
+                                                   "ic_sup":  0.064,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "JAX",
+                        "posicion":  14,
+                        "tasa":  {
+                                     "estimado":  0.131,
+                                     "ic_inf":  0.073,
+                                     "ic_sup":  0.189,
+                                     "n":  217,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.011,
+                                                   "ic_inf":  -0.048,
+                                                   "ic_sup":  0.069,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "NO",
+                        "posicion":  15,
+                        "tasa":  {
+                                     "estimado":  0.129,
+                                     "ic_inf":  0.072,
+                                     "ic_sup":  0.186,
+                                     "n":  228,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.009,
+                                                   "ic_inf":  -0.047,
+                                                   "ic_sup":  0.066,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "CLE",
+                        "posicion":  16,
+                        "tasa":  {
+                                     "estimado":  0.127,
+                                     "ic_inf":  0.072,
+                                     "ic_sup":  0.182,
+                                     "n":  242,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0.007,
+                                                   "ic_inf":  -0.048,
+                                                   "ic_sup":  0.061,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "CAR",
+                        "posicion":  17,
+                        "tasa":  {
+                                     "estimado":  0.12,
+                                     "ic_inf":  0.071,
+                                     "ic_sup":  0.169,
+                                     "n":  283,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  0,
+                                                   "ic_inf":  -0.049,
+                                                   "ic_sup":  0.05,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "ATL",
+                        "posicion":  18,
+                        "tasa":  {
+                                     "estimado":  0.117,
+                                     "ic_inf":  0.07,
+                                     "ic_sup":  0.164,
+                                     "n":  304,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.003,
+                                                   "ic_inf":  -0.05,
+                                                   "ic_sup":  0.044,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "KC",
+                        "posicion":  19,
+                        "tasa":  {
+                                     "estimado":  0.117,
+                                     "ic_inf":  0.067,
+                                     "ic_sup":  0.167,
+                                     "n":  271,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.003,
+                                                   "ic_inf":  -0.053,
+                                                   "ic_sup":  0.046,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "PIT",
+                        "posicion":  20,
+                        "tasa":  {
+                                     "estimado":  0.11,
+                                     "ic_inf":  0.064,
+                                     "ic_sup":  0.156,
+                                     "n":  307,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.01,
+                                                   "ic_inf":  -0.056,
+                                                   "ic_sup":  0.035,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "DAL",
+                        "posicion":  21,
+                        "tasa":  {
+                                     "estimado":  0.106,
+                                     "ic_inf":  0.056,
+                                     "ic_sup":  0.156,
+                                     "n":  247,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.014,
+                                                   "ic_inf":  -0.064,
+                                                   "ic_sup":  0.036,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  1,
+                        "distinto_de_liga":  false
+                    },
+                    {
+                        "equipo":  "ARI",
+                        "posicion":  22,
+                        "tasa":  {
+                                     "estimado":  0.099,
+                                     "ic_inf":  0.056,
+                                     "ic_sup":  0.142,
+                                     "n":  309,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.021,
+                                                   "ic_inf":  -0.065,
+                                                   "ic_sup":  0.022,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "WAS",
+                        "posicion":  23,
+                        "tasa":  {
+                                     "estimado":  0.095,
+                                     "ic_inf":  0.053,
+                                     "ic_sup":  0.137,
+                                     "n":  316,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.025,
+                                                   "ic_inf":  -0.067,
+                                                   "ic_sup":  0.017,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "HOU",
+                        "posicion":  24,
+                        "tasa":  {
+                                     "estimado":  0.092,
+                                     "ic_inf":  0.041,
+                                     "ic_sup":  0.143,
+                                     "n":  209,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.028,
+                                                   "ic_inf":  -0.079,
+                                                   "ic_sup":  0.023,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "LA",
+                        "posicion":  25,
+                        "tasa":  {
+                                     "estimado":  0.091,
+                                     "ic_inf":  0.049,
+                                     "ic_sup":  0.133,
+                                     "n":  311,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.029,
+                                                   "ic_inf":  -0.071,
+                                                   "ic_sup":  0.013,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "SEA",
+                        "posicion":  26,
+                        "tasa":  {
+                                     "estimado":  0.089,
+                                     "ic_inf":  0.044,
+                                     "ic_sup":  0.134,
+                                     "n":  259,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.031,
+                                                   "ic_inf":  -0.076,
+                                                   "ic_sup":  0.015,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "DET",
+                        "posicion":  27,
+                        "tasa":  {
+                                     "estimado":  0.089,
+                                     "ic_inf":  0.047,
+                                     "ic_sup":  0.131,
+                                     "n":  298,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.031,
+                                                   "ic_inf":  -0.073,
+                                                   "ic_sup":  0.011,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "GB",
+                        "posicion":  28,
+                        "tasa":  {
+                                     "estimado":  0.086,
+                                     "ic_inf":  0.041,
+                                     "ic_sup":  0.131,
+                                     "n":  249,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.034,
+                                                   "ic_inf":  -0.079,
+                                                   "ic_sup":  0.012,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "NE",
+                        "posicion":  29,
+                        "tasa":  {
+                                     "estimado":  0.086,
+                                     "ic_inf":  0.035,
+                                     "ic_sup":  0.137,
+                                     "n":  200,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.034,
+                                                   "ic_inf":  -0.084,
+                                                   "ic_sup":  0.017,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "TEN",
+                        "posicion":  30,
+                        "tasa":  {
+                                     "estimado":  0.082,
+                                     "ic_inf":  0.042,
+                                     "ic_sup":  0.122,
+                                     "n":  308,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.038,
+                                                   "ic_inf":  -0.078,
+                                                   "ic_sup":  0.001,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "MIN",
+                        "posicion":  31,
+                        "tasa":  {
+                                     "estimado":  0.081,
+                                     "ic_inf":  0.035,
+                                     "ic_sup":  0.127,
+                                     "n":  230,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.039,
+                                                   "ic_inf":  -0.085,
+                                                   "ic_sup":  0.007,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    },
+                    {
+                        "equipo":  "SF",
+                        "posicion":  32,
+                        "tasa":  {
+                                     "estimado":  0.08,
+                                     "ic_inf":  0.041,
+                                     "ic_sup":  0.119,
+                                     "n":  310,
+                                     "metodo":  "cluster_bootstrap_partido",
+                                     "nota":  null
+                                 },
+                        "diferencia_vs_liga":  {
+                                                   "estimado":  -0.04,
+                                                   "ic_inf":  -0.079,
+                                                   "ic_sup":  0,
+                                                   "n":  8498,
+                                                   "metodo":  "estratificada",
+                                                   "nota":  null
+                                               },
+                        "q_bh":  0,
+                        "distinto_de_liga":  true
+                    }
+                ]
+}

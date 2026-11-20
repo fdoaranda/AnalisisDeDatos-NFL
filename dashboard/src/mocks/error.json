@@ -1,0 +1,6 @@
+{
+    "error":  {
+                  "codigo":  "sin_datos",
+                  "mensaje":  "No hay jugadas para este filtro (mock de error)."
+              }
+}

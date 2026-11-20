@@ -1,0 +1,73 @@
+{
+    "fuente":  "NFL Big Data Bowl: tracking + PFF, temporada 2021, semanas 1-8 (DATOS DE EJEMPLO)",
+    "temporada":  2021,
+    "semanas":  [
+                    1,
+                    8
+                ],
+    "partidos":  122,
+    "jugadas":  8522,
+    "equipos":  [
+                    "ARI",
+                    "ATL",
+                    "BAL",
+                    "BUF",
+                    "CAR",
+                    "CHI",
+                    "CIN",
+                    "CLE",
+                    "DAL",
+                    "DEN",
+                    "DET",
+                    "GB",
+                    "HOU",
+                    "IND",
+                    "JAX",
+                    "KC",
+                    "LA",
+                    "LAC",
+                    "LV",
+                    "MIA",
+                    "MIN",
+                    "NE",
+                    "NO",
+                    "NYG",
+                    "NYJ",
+                    "PHI",
+                    "PIT",
+                    "SEA",
+                    "SF",
+                    "TB",
+                    "TEN",
+                    "WAS"
+                ],
+    "metricas":  [
+                     {
+                         "id":  "muestra_no_manda",
+                         "etiqueta":  "Muestra blitz y no lo manda",
+                         "descripcion":  "5 o mÃ¡s defensores en la lÃ­nea al snap y 4 o menos atacan al QB"
+                     },
+                     {
+                         "id":  "blitz_escondido",
+                         "etiqueta":  "Blitz escondido",
+                         "descripcion":  "4 o menos defensores en la lÃ­nea al snap y 5 o mÃ¡s atacan al QB"
+                     },
+                     {
+                         "id":  "rotacion_cascara",
+                         "etiqueta":  "Muestra 2 safeties profundos y rota",
+                         "descripcion":  "De las jugadas con 2 safeties a 10 yd o mÃ¡s al snap, % que juega Cover-3 o Cover-1"
+                     }
+                 ],
+    "umbrales":  {
+                     "linea_profundidad_yd":  2,
+                     "linea_ancho_yd":  8,
+                     "safety_profundo_yd":  10
+                 },
+    "limitaciones":  [
+                         "Solo jugadas de pase de 2021, semanas 1-8.",
+                         "Lo que se juega viene de etiquetas PFF (anotaciÃ³n humana).",
+                         "Mide cuÃ¡nto disfraza cada defensa, no si el disfraz funciona.",
+                         "La rotaciÃ³n de safeties excluye sacks y scrambles (no tienen frame de pase)."
+                     ],
+    "generado":  "2026-11-20T11:30:00Z"
+}
