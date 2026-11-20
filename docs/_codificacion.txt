@@ -1,0 +1,29 @@
+OK       dashboard/src/api.ts
+OK       dashboard/src/App.tsx
+OK       dashboard/src/format.ts
+OK       dashboard/src/index.css
+OK       dashboard/src/main.tsx
+OK       dashboard/src/vite-env.d.ts
+OK       dashboard/src/mocks/error.json
+OK       dashboard/src/mocks/meta.json
+OK       dashboard/src/mocks/resumen_blitz_escondido.json
+OK       dashboard/src/mocks/resumen_muestra_no_manda.json
+OK       dashboard/src/mocks/resumen_rotacion_cascara.json
+OK       dashboard/src/types/api.ts
+OK       dashboard/src/views/Hallazgo.tsx
+OK       dashboard/src/views/Perfil.tsx
+OK       dashboard/src/views/Situacion.tsx
+OK       dashboard/index.html
+OK       dashboard/package-lock.json
+OK       dashboard/package.json
+OK       dashboard/postcss.config.js
+OK       dashboard/tailwind.config.js
+OK       dashboard/tsconfig.json
+OK       dashboard/vite.config.ts
+OK       backend/analisis.py
+OK       backend/main.py
+OK       backend/modelos.py
+OK       backend/stats_toolkit.py
+OK       backend/__init__.py
+API /api/meta Content-Type: application/json; charset=utf-8
+API /api/meta contiene 'más' bien codificado: True; mojibake: False

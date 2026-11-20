@@ -277,7 +277,7 @@ export interface Serie {
 ## Reglas para Hugo (backend)
 - `backend/main.py` expone `app`; todo bajo `/api/...` salvo `/health`.
 - Cargar agregados precalculados UNA vez al arrancar (lifespan). No leer el tracking por request.
-- Todo IC sale de `tools/stats_toolkit.py`; semilla fija.
+- Todo IC sale de `backend/stats_toolkit.py` (copia de `tools/stats_toolkit.py`: el backend no puede importar `tools/` en el hosting); semilla fija.
 - Handler de excepciones que devuelva siempre la forma `ApiError` (incluye `RequestValidationError` → 400).
 - `summary` en cada endpoint (Swagger en `/docs`). Probar cada endpoint antes de marcarlo "real".
 

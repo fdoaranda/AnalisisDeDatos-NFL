@@ -1,7 +1,7 @@
-### health -> HTTP 200 (24 ms)
+### health -> HTTP 200 (21 ms)
 {"status": "ok"}
 ### api/meta -> HTTP 200 (0 ms)
-{"fuente": "NFL Big Data Bowl: tracking + PFF, temporada 2021, semanas 1-8", "temporada": 2021, "semanas": [1, 8], "partidos": 122, "jugadas": 8498, "metricas": [{"id": "muestra_no_manda", "etiqueta": "Muestra blitz y no lo manda", "descripcion": "5 o más defensores en la línea al snap y 4 o menos atacan al QB"}, {"id": "blitz_escondido", "etiqueta": "Blitz escondido", "descripcion": "4 o menos defensores en la línea al snap y 5 o más atacan al QB"}, {"id": "rotacion_cascara", "etiqueta": "Muestra 2 safeties profundos y rota", "descripcion": "De las jugadas con 2 safeties a 10 yd o más al snap, % que juega Cover-3 o Cover-1"}], "umbrales": {"linea_profundidad_yd": 2.0, "linea_ancho_yd": 8.0, "safety_profundo_yd": 10.0}, "limitaciones": ["Solo jugadas de pase de 2021, semanas 1-8.", "Lo que se juega viene de etiquetas PFF (anotación humana).", "Mide cuánto disfraza cada defensa, no si el disfraz funciona.", "Cada equipo jugó 7 u 8 partidos: los intervalos por equipo pueden quedar estrechos.", "'Distinto de la liga' se decide con un IC de 99.84 % por partido (Bonferroni por 32 equipos), más exigente que el IC de 95 % que se muestra; un equipo puede tener el IC de 95 % sin el 0 y aun así no salir distinto."], "criterio_distinto": {"nivel_ic_mostrado": 0.95, "nivel_ic_decision": 0.9984375, "n_comparaciones": 32, "metodo": "Bonferroni", "texto": "Distinto de la liga = el IC de decisión de 99.84 % por partido (Bonferroni, 32 equipos) de la diferencia ajustada no incluye el 0. Las barras muestran el IC de 95 %."}, "generado": "2026-11-20T18:24:38Z"}
+{"fuente": "NFL Big Data Bowl: tracking + PFF, temporada 2021, semanas 1-8", "temporada": 2021, "semanas": [1, 8], "partidos": 122, "jugadas": 8498, "metricas": [{"id": "muestra_no_manda", "etiqueta": "Muestra blitz y no lo manda", "descripcion": "5 o más defensores en la línea al snap y 4 o menos atacan al QB"}, {"id": "blitz_escondido", "etiqueta": "Blitz escondido", "descripcion": "4 o menos defensores en la línea al snap y 5 o más atacan al QB"}, {"id": "rotacion_cascara", "etiqueta": "Muestra 2 safeties profundos y rota", "descripcion": "De las jugadas con 2 safeties a 10 yd o más al snap, % que juega Cover-3 o Cover-1"}], "umbrales": {"linea_profundidad_yd": 2.0, "linea_ancho_yd": 8.0, "safety_profundo_yd": 10.0}, "limitaciones": ["Solo jugadas de pase de 2021, semanas 1-8.", "Lo que se juega viene de etiquetas PFF (anotación humana).", "Mide cuánto disfraza cada defensa, no si el disfraz funciona.", "Cada equipo jugó 7 u 8 partidos: los intervalos por equipo pueden quedar estrechos.", "'Distinto de la liga' se decide con un IC de 99.84 % por partido (Bonferroni por 32 equipos), más exigente que el IC de 95 % que se muestra; un equipo puede tener el IC de 95 % sin el 0 y aun así no salir distinto."], "criterio_distinto": {"nivel_ic_mostrado": 0.95, "nivel_ic_decision": 0.9984375, "n_comparaciones": 32, "metodo": "Bonferroni", "texto": "Distinto de la liga = el IC de decisión de 99.84 % por partido (Bonferroni, 32 equipos) de la diferencia ajustada no incluye el 0. Las barras muestran el IC de 95 %."}, "generado": "2026-11-20T18:49:04Z"}
 equipos: 32 ['ARI', 'ATL', 'BAL', 'BUF', 'CAR'] ...
 ### api/resumen?metrica=muestra_no_manda -> HTTP 200 (0 ms)
 titulo: Ningún equipo muestra blitz sin mandarlo claramente más que la liga (19 %) | liga: +0.195 [+0.182, +0.207] n=8498
@@ -43,7 +43,7 @@ titulo: KC no disfraza claramente más que la liga en ninguna de las 3 métricas
   muestra_no_manda: equipo +0.208 [+0.149, +0.290] n=259 | liga +0.195 [+0.182, +0.207] n=8498 | dif +0.005 [-0.070, +0.096] n=7459 | #12 distinto=False
   blitz_escondido: equipo +0.100 [+0.070, +0.127] n=259 | liga +0.088 [+0.081, +0.096] n=8498 | dif +0.023 [-0.025, +0.076] n=7459 | #10 distinto=False
   rotacion_cascara: equipo +0.280 [+0.203, +0.406] n=50 | liga +0.356 [+0.328, +0.385] n=3293 | dif -0.175 [-0.295, -0.093] n=1837 | #22 distinto=False
-### api/serie?equipo=MIA&metrica=muestra_no_manda -> HTTP 200 (387 ms)
+### api/serie?equipo=MIA&metrica=muestra_no_manda -> HTTP 200 (434 ms)
 titulo: MIA simula más el blitz en 2do y largo (8+): 36 % contra 16 % de la liga
   1er down: equipo +0.352 [+0.235, +0.458] n=108 | liga +0.186 [+0.171, +0.202] n=3057 | nota: solo 8 partidos: el intervalo puede quedar estrecho
   2do y corto (1-3): equipo +0.000 [+0.000, +0.000] n=4 | liga +0.149 [+0.104, +0.199] n=255 | nota: pocos datos: interpretar con cautela; solo 4 partidos: el intervalo puede quedar estrecho
@@ -52,7 +52,7 @@ titulo: MIA simula más el blitz en 2do y largo (8+): 36 % contra 16 % de la lig
   3ro/4to y corto (1-3): equipo +0.400 [+0.231, +0.615] n=15 | liga +0.281 [+0.240, +0.324] n=566 | nota: pocos datos: interpretar con cautela; solo 7 partidos: el intervalo puede quedar estrecho
   3ro/4to y medio (4-7): equipo +0.250 [+0.094, +0.414] n=32 | liga +0.273 [+0.239, +0.307] n=977 | nota: solo 7 partidos: el intervalo puede quedar estrecho
   3ro/4to y largo (8+): equipo +0.317 [+0.179, +0.442] n=41 | liga +0.169 [+0.143, +0.197] n=1078 | nota: solo 8 partidos: el intervalo puede quedar estrecho
-### api/serie?equipo=TB&metrica=blitz_escondido -> HTTP 200 (315 ms)
+### api/serie?equipo=TB&metrica=blitz_escondido -> HTTP 200 (417 ms)
 titulo: En ninguna situación TB se separa claramente por encima de la liga en «Blitz escondido»
   1er down: equipo +0.111 [+0.075, +0.154] n=126 | liga +0.079 [+0.070, +0.090] n=3057 | nota: solo 8 partidos: el intervalo puede quedar estrecho
   2do y corto (1-3): equipo +0.083 [+0.000, +0.429] n=12 | liga +0.129 [+0.088, +0.173] n=255 | nota: pocos datos: interpretar con cautela; solo 5 partidos: el intervalo puede quedar estrecho
@@ -63,9 +63,9 @@ titulo: En ninguna situación TB se separa claramente por encima de la liga en �
   3ro/4to y largo (8+): equipo +0.143 [+0.034, +0.280] n=28 | liga +0.093 [+0.075, +0.112] n=1078 | nota: pocos datos: interpretar con cautela; solo 8 partidos: el intervalo puede quedar estrecho
 ### api/resumen -> HTTP 400 (3 ms)
 {"error": {"codigo": "parametro_invalido", "mensaje": "Falta el parámetro 'metrica'. Usa una de: muestra_no_manda, blitz_escondido, rotacion_cascara."}}
-### api/resumen?metrica=xyz -> HTTP 400 (1 ms)
+### api/resumen?metrica=xyz -> HTTP 400 (2 ms)
 {"error": {"codigo": "parametro_invalido", "mensaje": "La métrica 'xyz' no existe aquí. Usa una de: muestra_no_manda, blitz_escondido, rotacion_cascara."}}
-### api/comparacion -> HTTP 400 (1 ms)
+### api/comparacion -> HTTP 400 (2 ms)
 {"error": {"codigo": "parametro_invalido", "mensaje": "Falta el parámetro 'equipo' (abreviatura, por ejemplo KC)."}}
 ### api/comparacion?equipo=XYZ -> HTTP 400 (3 ms)
 {"error": {"codigo": "parametro_invalido", "mensaje": "El equipo 'XYZ' no existe. Usa uno de /api/meta."}}

@@ -1,6 +1,7 @@
 """Cálculo de las métricas de disfraz a partir de backend/datos/jugadas_disfraz.csv.
 
-Toda cifra con incertidumbre sale de tools/stats_toolkit.py. Semilla fija.
+Toda cifra con incertidumbre sale de backend/stats_toolkit.py (copia de tools/stats_toolkit.py,
+para que la app no dependa de la carpeta tools/ en el hosting). Semilla fija.
 Cifra principal = IC 95 % por bootstrap de PARTIDOS (las jugadas de un partido no son independientes).
 El q-value (Benjamini-Hochberg sobre un EE que supone independencia) es solo orientativo.
 El archivo de entrada lo genera tools/precalcular_jugadas.py a partir de data/.
@@ -8,18 +9,16 @@ El archivo de entrada lo genera tools/precalcular_jugadas.py a partir de data/.
 from __future__ import annotations
 
 import math
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from backend.stats_toolkit import (benjamini_hochberg, cluster_bootstrap_ci,
+                                   cluster_bootstrap_stratified_diff, shrink_rates)
+
 ROOT = Path(__file__).resolve().parent.parent
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from tools.stats_toolkit import (benjamini_hochberg, cluster_bootstrap_ci,  # noqa: E402
-                                 cluster_bootstrap_stratified_diff, shrink_rates)
 
 ARCHIVO = ROOT / "backend" / "datos" / "jugadas_disfraz.csv"
 TEMPORADA = 2021    # [OBSERVADO] games.csv: season = 2021 en los 122 partidos (docs/datos.md, hallazgo 1)

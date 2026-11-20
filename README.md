@@ -53,7 +53,7 @@ El tablero arma el perfil de cualquier equipo en las tres métricas. Para Miami:
 - **Intervalos:** remuestreamos partidos completos (bootstrap por partido), porque las jugadas de un mismo partido se parecen entre sí.
 - **Comparación con la liga:** se ajusta por down, yardas por ganar y formación ofensiva.
 - **Criterio estricto de "distinto de la liga":** el intervalo al 99.84 % de la diferencia no incluye el cero. Es la corrección de Bonferroni por comparar 32 equipos. Las barras del tablero muestran el intervalo al 95 %, así que un equipo puede verse separado de la liga y aun así no pasar el criterio. Es el caso de Miami en blitz.
-- **Código:** cada cifra de este README sale de la API ([`docs/cifras_readme.txt`](docs/cifras_readme.txt)). La API la calcula con [`backend/analisis.py`](backend/analisis.py) y [`tools/stats_toolkit.py`](tools/stats_toolkit.py). Pregunta y análisis declarados de antemano: [`PLAN.md`](PLAN.md).
+- **Código:** cada cifra de este README sale de la API ([`docs/cifras_readme.txt`](docs/cifras_readme.txt)). La API la calcula con [`backend/analisis.py`](backend/analisis.py) y [`backend/stats_toolkit.py`](backend/stats_toolkit.py). Pregunta y análisis declarados de antemano: [`PLAN.md`](PLAN.md).
 
 ## Limitaciones
 

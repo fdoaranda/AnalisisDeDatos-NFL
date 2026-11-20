@@ -1,53 +1,27 @@
-INFO:     Started server process [15052]
+INFO:     Started server process [23892]
 INFO:     Waiting for application startup.
-INFO:     Datos listos: 8498 jugadas, 13.0 s
+INFO:     Datos listos: 8498 jugadas, 14.0 s
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:56441 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56442 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56443 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56444 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56445 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56446 - "GET /api/resumen?metrica=rotacion_cascara HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56447 - "GET /api/comparacion?equipo=MIA HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56448 - "GET /api/comparacion?equipo=kc HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56449 - "GET /api/serie?equipo=MIA&metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56450 - "GET /api/serie?equipo=TB&metrica=blitz_escondido HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56451 - "GET /api/resumen HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56452 - "GET /api/resumen?metrica=xyz HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56453 - "GET /api/comparacion HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56454 - "GET /api/comparacion?equipo=XYZ HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56455 - "GET /api/serie?equipo=MIA HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56456 - "GET /api/serie?equipo=MIA&metrica=rotacion_cascara HTTP/1.1" 400 Bad Request
-INFO:     127.0.0.1:56457 - "GET /api/noexiste HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:56459 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56461 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56462 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54390 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54391 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54392 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54393 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52303 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52304 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52305 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52306 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52835 - "GET /api/comparacion?equipo=KC HTTP/1.1" 200 OK
-INFO:     127.0.0.1:52337 - "GET /api/comparacion?equipo=KC HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55087 - "GET /api/serie?equipo=KC&metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64842 - "GET /api/serie?equipo=KC&metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:53944 - "GET /api/serie?equipo=NYG&metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57509 - "GET /api/serie?equipo=NYG&metrica=blitz_escondido HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57513 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57514 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57515 - "GET /api/resumen?metrica=rotacion_cascara HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57516 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57517 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
-INFO:     127.0.0.1:57518 - "GET /api/comparacion?equipo=MIA HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55574 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55575 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55576 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55577 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:60141 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:60142 - "GET /api/meta HTTP/1.1" 200 OK
-INFO:     127.0.0.1:60143 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
-INFO:     127.0.0.1:60144 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63377 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63378 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63379 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63380 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63382 - "GET /api/resumen?metrica=rotacion_cascara HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63383 - "GET /api/comparacion?equipo=MIA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63384 - "GET /api/comparacion?equipo=kc HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63385 - "GET /api/serie?equipo=MIA&metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63386 - "GET /api/serie?equipo=TB&metrica=blitz_escondido HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63387 - "GET /api/resumen HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63388 - "GET /api/resumen?metrica=xyz HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63389 - "GET /api/comparacion HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63390 - "GET /api/comparacion?equipo=XYZ HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63391 - "GET /api/serie?equipo=MIA HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63392 - "GET /api/serie?equipo=MIA&metrica=rotacion_cascara HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:63393 - "GET /api/noexiste HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63395 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63397 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63398 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50988 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50989 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK

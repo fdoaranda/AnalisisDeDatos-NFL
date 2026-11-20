@@ -1,0 +1,2 @@
+pids escuchando en 8000: [15052]
+taskkill 15052: código 0
