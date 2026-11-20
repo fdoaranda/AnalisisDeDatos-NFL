@@ -1,85 +1,86 @@
-# Índice de disfraz defensivo
+# Índice de disfraz defensivo: lo que la defensa muestra vs. lo que juega
 
-Construimos el Índice de disfraz defensivo, una métrica nueva presentada en un tablero que compara lo que cada defensa de la NFL muestra antes del snap con lo que realmente juega. El hallazgo más claro: cuando Miami coloca dos safeties profundos, termina jugando con uno solo atrás en 65 % de esas jugadas (entre 54 % y 77 %), casi el doble que el promedio de la liga (36 %). En las dos formas de blitz disfrazado (amenazar con blitz y no mandarlo, o esconderlo), ningún equipo destaca claramente por encima de la liga: con 7 u 8 partidos por equipo, la mayoría no se distingue, y eso también es un resultado. Lo usaría un coordinador ofensivo al preparar el partido contra un rival, para decidir la protección y qué lectura darle a su quarterback.
+Construimos un tablero que mide cuánto disfraza cada defensa de la NFL sus intenciones antes del snap: compara lo que la defensa **muestra** con la posición de sus jugadores (tracking) contra lo que **juega** (etiquetas de PFF). Lo más sólido que revela es la rotación de cáscara: con 2 safeties profundos al snap, Miami juega cobertura de un solo safety en ~65 % de las jugadas, contra ~36 % de la liga. Lo usaría un coordinador ofensivo para elegir protección y lectura del QB contra un rival, y un comentarista para explicar qué está escondiendo una defensa. Cada cifra trae su intervalo de confianza y su n, y el tablero dice también lo que **no** se puede concluir.
 
-![captura](docs/captura.png)
+![Captura del tablero](docs/captura.png)
 
----
+## Hallazgos
 
-## Qué encontramos
+Temporada 2021, semanas 1 a 8, solo jugadas de pase. Un equipo se marca como "distinto de la liga" solo si pasa un criterio estricto (ver Método).
 
-Toda cifra lleva su intervalo de confianza al 95 % y el número de jugadas (n). Un equipo cuenta como **"distinto de la liga"** solo si pasa un criterio estricto, pensado para no premiar la suerte al comparar 32 equipos a la vez. El criterio se explica en [Cómo lo medimos](#cómo-lo-medimos).
-
-### 1. Miami miente con sus safeties; Tampa Bay, Houston y Minnesota no
-
-Antes del snap, dos safeties profundos le dicen al quarterback "cobertura con dos safeties atrás". Medimos cuántas veces esa imagen se convierte en una cobertura de un solo safety (Cover-3 o Cover-1) cuando sale el balón.
-
-| Defensa | Con 2 safeties profundos al snap, juega con uno solo | Jugadas |
+| Métrica | Liga (IC 95 %) | Equipos distintos de la liga |
 |---|---|---|
-| **Miami (MIA)** | **65.0 %** [54.1–77.3] | 80 |
-| Promedio de la liga | 35.6 % [32.8–38.5] | 3,293 |
-| Tampa Bay (TB) | 11.6 % [8.8–14.9] | 95 |
-| Houston (HOU) | 7.7 % [3.9–13.6] | 104 |
-| Minnesota (MIN) | 2.5 % [0.0–6.2] | 80 |
+| Rotación de cáscara: con 2 safeties profundos al snap, % que juega cobertura de un safety (Cover-3 o Cover-1) | 35.6 % [32.8, 38.5] | 4: MIA (65 %, por encima de la liga), TB, HOU y MIN |
+| Muestra blitz y no lo manda: 5 o más en la línea al snap y 4 o menos atacan al QB | 19.5 % [18.2, 20.7] | 4, todos por debajo de la liga: LV, NYJ, CLE y SF. Ninguno por encima |
+| Blitz escondido: 4 o menos en la línea al snap y 5 o más atacan | 8.8 % [8.1, 9.6] | 1, por debajo de la liga (BUF). Ninguno por encima |
 
-- **Miami** es el único equipo claramente por encima de la liga. Tras ajustar por down, yardas por ganar y formación, rota 34.9 puntos más que el resto [+17.7, +48.8].
-- **Qué significa para preparar el partido:** contra Miami, ver dos safeties atrás al snap no es una lectura confiable. En la mayoría de esas jugadas terminan con un solo safety profundo.
-- **El otro extremo también sirve.** Contra Tampa Bay, Houston o Minnesota, la imagen de dos safeties casi siempre es honesta: lo que muestran es lo que juegan.
-- **Para la transmisión:** "Cuando Miami enseña dos safeties profundos, en dos de cada tres jugadas está mintiendo."
+- **Resultado honesto:** en "muestra blitz y no lo manda" y "blitz escondido" ningún equipo está claramente por encima de la liga. Con 7 u 8 partidos por equipo, la mayoría de las defensas no se distinguen del promedio. Eso también es un hallazgo.
+- Cifras de cada equipo (con IC y n) en el tablero y en la API (`/api/resumen`, `/api/comparacion`).
 
-### 2. El blitz simulado es una práctica de toda la liga, no de un equipo
+## Qué tan robusto es
 
-| Métrica | Liga | Equipos claramente por encima | Claramente por debajo |
-|---|---|---|---|
-| **Muestra blitz y no lo manda**: 5 o más en la línea, 4 o menos atacan | 19.5 % [18.2–20.7], n = 8,498 | **Ninguno** | SF 5.7 %, CLE 7.7 %, NYJ 11.0 %, LV 13.9 % |
-| **Blitz escondido**: 4 o menos en la línea, 5 o más atacan | 8.8 % [8.1–9.6], n = 8,498 | **Ninguno** | BUF 4.4 % |
+Probamos otros umbrales y otras mitades de temporada (análisis en [`tools/sensibilidad_estabilidad.py`](tools/sensibilidad_estabilidad.py)):
 
-- **Alrededor de 1 de cada 5 jugadas de pase** de la liga amenaza con blitz y no lo manda. Es un recurso común, no la firma de un equipo.
-- **Miami encabeza el ranking** de "muestra blitz y no lo manda" con 32.9 % [25.2–40.4] (n = 295), pero no pasa el criterio estricto. Con 8 partidos no se puede descartar que sea suerte.
-- **Que nadie destaque también es un resultado.** Con 7 u 8 partidos por equipo, el disfraz del blitz no separa a los equipos de forma confiable. El coordinador debería preparar a su línea contra el blitz simulado frente a cualquier rival, no solo frente a uno.
-- **San Francisco, Cleveland, Nueva York (Jets) y Las Vegas casi nunca amenazan sin mandar.** Ojo: puede deberse a cómo alinean normalmente, y no a una decisión de no disfrazar (ver [Limitaciones](#limitaciones)).
+- **Rotación de cáscara:** el ranking casi no cambia al mover el umbral del safety (Spearman ≥ 0.96). Es la métrica más estable.
+- **Muestra blitz y no lo manda:** el ranking es estable si "en la línea" es 8 o 10 yd, pero cambia con 6 yd. MIA queda entre los primeros y SF último en todas las definiciones probadas.
+- **Blitz escondido:** el ranking entre equipos no se distingue del ruido de muestreo. No lo interpretamos como ranking.
+- **Entre semanas 1-4 y 5-8** los rankings se parecen poco, pero no más de lo que se esperaría por azar con tan pocos partidos. No afirmamos que un equipo disfrace de forma constante.
 
-### 3. El perfil de un rival en una línea
+## Datos
 
-El tablero arma el perfil de cualquier equipo en las tres métricas. Para Miami: **"disfraza claramente más que la liga en 1 de 3 métricas"**, la rotación de safeties. Es el tipo de resumen que un coordinador lleva a la reunión del lunes.
+- Fuente: NFL Big Data Bowl (tracking de jugadores + etiquetas PFF), **temporada 2021, semanas 1 a 8**. 122 partidos y 8,557 jugadas de pase (8,498 con snap y defensores medidos para el frente).
+- Ventana de tracking corta: unos 5 frames antes del snap, así que no estudiamos movimiento previo.
+- "Lo que se juega" viene de etiquetas de PFF (anotación humana).
+- Auditoría de calidad en [`docs/datos.md`](docs/datos.md). Los datos originales van en el `.zip` de entrega, pero **no están en este repositorio** (pesan 825 MB). La app usa un archivo precalculado: `backend/datos/jugadas_disfraz.csv`.
 
----
+## Método
 
-## Cómo lo medimos
+- **Definiciones:** "en la línea" = 2 yd o menos de profundidad y 8 yd o menos a lo ancho del balón al snap. Safety profundo = 10 yd o más. Son supuestos; por eso probamos su sensibilidad.
+- **Tasas por equipo:** bootstrap por partido (se remuestrean partidos completos, porque las jugadas de un mismo partido no son independientes).
+- **Diferencia contra la liga:** comparación estratificada por down × yardas por ganar × formación ofensiva.
+- **"Distinto de la liga":** el intervalo por partido de la diferencia ajustada, al 99.84 % (Bonferroni, 32 equipos), no incluye 0. Las barras del tablero muestran el IC al 95 %. Es un criterio conservador a propósito: con 32 equipos, alguno saldría "distinto" por azar.
+- Funciones estadísticas (solo numpy y pandas) en [`backend/stats_toolkit.py`](backend/stats_toolkit.py).
 
-- **Lo que se muestra:** dónde está cada defensor en el instante del snap, según los datos de seguimiento (tracking). "En la línea" significa a 2 yardas o menos del balón en profundidad y a 8 o menos a lo ancho. "Safety profundo" significa a 10 yardas o más.
-- **Lo que se juega:** las etiquetas de PFF, que dicen si cada defensor atacó al quarterback o cubrió, y qué cobertura se jugó.
-- **Datos:** NFL Big Data Bowl, temporada 2021, semanas 1 a 8. Son 122 partidos y 8,498 jugadas de pase, sin conversiones de 2 puntos. La rotación de safeties usa las 3,293 jugadas con exactamente dos safeties profundos al snap, incluidos sacks y scrambles. Auditoría de los datos: [`docs/datos.md`](docs/datos.md).
-- **Intervalos:** remuestreamos partidos completos (bootstrap por partido), porque las jugadas de un mismo partido se parecen entre sí.
-- **Comparación con la liga:** se ajusta por down, yardas por ganar y formación ofensiva.
-- **Criterio estricto de "distinto de la liga":** el intervalo al 99.84 % de la diferencia no incluye el cero. Es la corrección de Bonferroni por comparar 32 equipos. Las barras del tablero muestran el intervalo al 95 %, así que un equipo puede verse separado de la liga y aun así no pasar el criterio. Es el caso de Miami en blitz.
-- **Código:** cada cifra de este README sale de la API ([`docs/cifras_readme.txt`](docs/cifras_readme.txt)). La API la calcula con [`backend/analisis.py`](backend/analisis.py) y [`backend/stats_toolkit.py`](backend/stats_toolkit.py). Pregunta y análisis declarados de antemano: [`PLAN.md`](PLAN.md).
+## Qué NO se puede concluir
 
-## Limitaciones
-
-- **No es causal.** Medimos cuánto disfraza cada defensa, no si el disfraz funciona ni si engaña al quarterback.
-- **Los umbrales son supuestos** (2 yd, 8 yd y 10 yd). Todavía no probamos si el ranking cambia con otros valores.
-- **SF, CLE y NYJ** pueden salir bajos en "muestra blitz y no lo manda" por cuántos jugadores alinean normalmente en la línea, no por una decisión de disfrazar.
-- **"Lo que se juega" viene de etiquetas de PFF**, que son anotación humana.
-- **Cada equipo jugó 7 u 8 partidos**, así que los intervalos por equipo pueden quedar algo estrechos.
-- **Solo hay pases de 2021, semanas 1 a 8**, y el tracking trae unos 5 frames antes del snap: no se puede estudiar el movimiento previo.
-- **La vista por situación** (down y yardas por ganar) es exploratoria: compara 7 situaciones sin corrección.
-
-**Siguientes pasos:** probar otros umbrales, revisar si el ranking se sostiene entre las semanas 1-4 y 5-8, y separar la alineación habitual de cada defensa del disfraz.
-
----
+- No mide si el disfraz **funciona** ni si engaña al QB: eso sería causal y con estos datos no se puede.
+- No aplica a carreras, otras temporadas ni a semanas 9 en adelante.
+- SF, CLE y NYJ salen bajos en "muestra blitz y no lo manda" y altos en "blitz escondido". Puede reflejar cuántos jugadores alinean habitualmente en la línea, y no un disfraz.
+- Los umbrales de "en la línea" y "safety profundo" son supuestos.
+- Con 7 u 8 partidos por equipo, los intervalos son anchos.
 
 ## Cómo correrlo
 
-Requiere el entorno del evento (Python 3.12 en `.venv`, Node 22). Desde la raíz, en dos terminales:
+Requisitos del evento: Python 3.12.12 con `uv` y Node 22.23.1 (el entorno queda en `.venv`).
 
 ```powershell
-.venv\Scripts\uvicorn backend.main:app --port 8000      # API (tarda ~30 s en calcular al arrancar)
-cd dashboard; npm ci; npm run dev                        # tablero en http://127.0.0.1:5173
+# 1. Verificar el entorno
+.\.hackathon\setup.cmd --check
+
+# 2. API (terminal 1), puerto 8000
+.venv\Scripts\uvicorn backend.main:app --port 8000
+
+# 3. Dashboard (terminal 2)
+cd dashboard
+npm install
+npm run dev
 ```
 
-Endpoints: `/health`, `/api/meta`, `/api/resumen`, `/api/comparacion`, `/api/serie`. Contrato en [`docs/api.md`](docs/api.md).
+Abre `http://127.0.0.1:5173`. El dashboard usa la API real a través de un proxy de `/api` hacia `http://127.0.0.1:8000`. La API tarda unos 15 a 30 segundos en arrancar porque calcula los intervalos al iniciar. Documentación interactiva de la API en `http://127.0.0.1:8000/docs`.
 
-**Stack:** Python 3.12 · FastAPI · pandas/numpy · React + Vite + TS + Tailwind + Recharts
+## Estructura
 
-**Equipo:** Hugo (análisis y API) y Fernando (tablero y README). Hackathon NFL Big Data Bowl, UNAM.
+```
+backend/    API FastAPI (main.py, analisis.py, modelos.py, stats_toolkit.py)
+  datos/    jugadas_disfraz.csv (una fila por jugada, precalculado)
+dashboard/  React 18 + Vite + TypeScript + Tailwind 3 + Recharts (3 vistas)
+docs/       api.md (contrato de la API), datos.md (auditoría), captura.png
+tools/      scripts de auditoría, precálculo y sensibilidad
+PLAN.md     pregunta, análisis declarados de antemano, supuestos y decisiones
+```
+
+## Equipo
+
+Hugo (números: `backend/`, `docs/`, `tools/`) y Fernando (dashboard y README). Hackathon NFL Big Data Bowl, UNAM, 2026.
+
+
