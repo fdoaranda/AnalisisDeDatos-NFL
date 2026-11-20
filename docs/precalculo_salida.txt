@@ -1,0 +1,9 @@
+archivos de tracking: 122
+filas escritas: 8557 -> backend/datos/jugadas_disfraz.csv
+jugadas con snap y defensores medidos: 8533
+válidas (sin 2pt): 8498
+defensores medidos al snap por jugada: {np.int64(11): 8498}
+control muestra_no_manda (5+ en línea y <=4 atacan): 1653 (esperado 1653)
+control blitz_escondido (<=4 en línea y 5+ atacan): 751 (esperado 751)
+jugadas con 2 safeties a >=10 yd al snap: 3293
+tiempo: 39 s

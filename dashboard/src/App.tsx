@@ -46,10 +46,18 @@ export default function App() {
                 </button>
               ))}
             </nav>
-            {vista === 'hallazgo' && <Hallazgo metricas={meta.metricas} />}
-            {vista === 'perfil' && <Perfil equipos={meta.equipos} equipo={equipo} onEquipo={setEquipo} />}
+            {vista === 'hallazgo' && <Hallazgo metricas={meta.metricas} criterio={meta.criterio_distinto} />}
+            {vista === 'perfil' && (
+              <Perfil equipos={meta.equipos} criterio={meta.criterio_distinto} equipo={equipo} onEquipo={setEquipo} />
+            )}
             {vista === 'situacion' && (
-              <Situacion metricas={meta.metricas} equipos={meta.equipos} equipo={equipo} onEquipo={setEquipo} />
+              <Situacion
+                metricas={meta.metricas}
+                equipos={meta.equipos}
+                criterio={meta.criterio_distinto}
+                equipo={equipo}
+                onEquipo={setEquipo}
+              />
             )}
           </>
         )}

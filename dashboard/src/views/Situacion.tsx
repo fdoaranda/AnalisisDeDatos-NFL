@@ -3,8 +3,8 @@ import {
   Bar, BarChart, CartesianGrid, ErrorBar, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import { ErrorApi, getSerie } from '../api';
-import { textoTasa } from '../format';
-import type { Estimacion, MetricaInfo, Serie } from '../types/api';
+import { etiquetaIC, textoTasa } from '../format';
+import type { CriterioDistinto, Estimacion, MetricaInfo, Serie } from '../types/api';
 
 const COLOR_EQUIPO = '#1d4ed8';
 const COLOR_LIGA = '#64748b';
@@ -25,12 +25,14 @@ function err(e: Estimacion): [number, number] {
   return [(e.estimado - e.ic_inf) * 100, (e.ic_sup - e.estimado) * 100];
 }
 
-export default function Situacion({ metricas, equipos, equipo, onEquipo }: {
+export default function Situacion({ metricas, equipos, criterio, equipo, onEquipo }: {
   metricas: MetricaInfo[];
   equipos: string[];
+  criterio: CriterioDistinto;
   equipo: string;
   onEquipo: (e: string) => void;
 }) {
+  const ic = etiquetaIC(criterio);
   const frente = metricas.filter((m): m is MetricaInfo & { id: MetricaFrente } => m.id !== 'rotacion_cascara');
   const [metrica, setMetrica] = useState<MetricaFrente>(frente[0].id);
   const [datos, setDatos] = useState<Serie | null>(null);
@@ -113,7 +115,7 @@ export default function Situacion({ metricas, equipos, equipo, onEquipo }: {
           </p>
 
           <div className="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <h3 className="font-semibold text-slate-900">{datos.equipo} contra la liga, por situación, con IC al 95%</h3>
+            <h3 className="font-semibold text-slate-900">{datos.equipo} contra la liga, por situación, con {ic}</h3>
             <div className="mt-2 h-96">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={filas} margin={{ top: 10, right: 16, bottom: 30, left: 8 }}>
@@ -147,13 +149,13 @@ export default function Situacion({ metricas, equipos, equipo, onEquipo }: {
               </ResponsiveContainer>
             </div>
             <p className="text-sm text-slate-600">
-              Las líneas negras son el IC 95%. Una barra faltante significa que el equipo no tuvo jugadas en esa situación. Las barras con n pequeño tienen intervalos muy anchos.
+              Las líneas negras son el {ic}. Una barra faltante significa que el equipo no tuvo jugadas en esa situación. Las barras con n pequeño tienen intervalos muy anchos.
             </p>
           </div>
 
           <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
             <table className="w-full min-w-[640px] text-left text-sm">
-              <caption className="p-3 text-left font-semibold text-slate-900">Detalle por situación (cifra, IC 95% y n)</caption>
+              <caption className="p-3 text-left font-semibold text-slate-900">Detalle por situación (cifra, {ic} y n)</caption>
               <thead className="bg-slate-100 text-slate-700">
                 <tr>
                   <th className="px-3 py-2">Situación</th>
@@ -166,11 +168,11 @@ export default function Situacion({ metricas, equipos, equipo, onEquipo }: {
                   <tr key={p.situacion} className="border-t border-slate-200 align-top">
                     <td className="px-3 py-2 font-semibold">{p.situacion}</td>
                     <td className="px-3 py-2">
-                      {textoTasa(p.equipo)}
+                      {textoTasa(p.equipo, ic)}
                       {p.equipo.nota && <span className="block font-semibold text-amber-700">⚠ {p.equipo.nota}</span>}
                     </td>
                     <td className="px-3 py-2">
-                      {textoTasa(p.liga)}
+                      {textoTasa(p.liga, ic)}
                       {p.liga.nota && <span className="block font-semibold text-amber-700">⚠ {p.liga.nota}</span>}
                     </td>
                   </tr>

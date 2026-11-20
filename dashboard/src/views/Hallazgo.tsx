@@ -4,12 +4,12 @@ import {
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import { ErrorApi, getResumen } from '../api';
-import { entero, pct, textoDif, textoTasa } from '../format';
-import type { EquipoRanking, MetricaId, MetricaInfo, Resumen } from '../types/api';
+import { entero, etiquetaIC, pct, pocosDatos, textoDif, textoTasa } from '../format';
+import type { CriterioDistinto, EquipoRanking, MetricaId, MetricaInfo, Resumen } from '../types/api';
 
-const COLOR_DISTINTO = '#1d4ed8'; // azul: distinto de la liga (q_bh < 0.05)
+const COLOR_DISTINTO = '#1d4ed8'; // azul: distinto_de_liga (criterio de /api/meta)
 const COLOR_NORMAL = '#64748b'; // gris: no distinguible de la liga
-const COLOR_POCOS = '#d97706'; // ámbar: n < 30
+const COLOR_POCOS = '#d97706'; // ámbar: la API marca "pocos datos" en la nota
 const COLOR_LIGA = '#dc2626';
 
 interface Fila {
@@ -20,7 +20,7 @@ interface Fila {
 }
 
 function colorDe(e: EquipoRanking): string {
-  if (e.tasa.nota) return COLOR_POCOS;
+  if (pocosDatos(e.tasa)) return COLOR_POCOS;
   return e.distinto_de_liga ? COLOR_DISTINTO : COLOR_NORMAL;
 }
 
@@ -37,14 +37,20 @@ function aFila(e: EquipoRanking): Fila {
   };
 }
 
-function Tip({ active, payload }: { active?: boolean; payload?: ReadonlyArray<{ payload: Fila }> }) {
+function Tip({ active, payload, total, ic }: {
+  active?: boolean;
+  payload?: ReadonlyArray<{ payload: Fila }>;
+  total: number;
+  ic: string;
+}) {
   if (!active || !payload || payload.length === 0) return null;
   const e = payload[0].payload.fila;
   return (
     <div className="max-w-xs rounded-md border border-slate-300 bg-white p-3 text-sm shadow">
-      <p className="font-bold">{e.equipo} · lugar {e.posicion} de 32</p>
-      <p>Tasa: {textoTasa(e.tasa)}</p>
-      <p>Diferencia vs. liga: {textoDif(e.diferencia_vs_liga)}</p>
+      <p className="font-bold">{e.equipo} · lugar {e.posicion} de {total}</p>
+      <p>Tasa: {textoTasa(e.tasa, ic)}</p>
+      <p>Diferencia vs. liga: {textoDif(e.diferencia_vs_liga, ic)}</p>
+      <p>{e.distinto_de_liga ? 'Distinto de la liga' : 'No distinguible de la liga'}</p>
       {e.tasa.nota && <p className="mt-1 font-semibold text-amber-700">⚠ {e.tasa.nota}</p>}
     </div>
   );
@@ -60,7 +66,8 @@ function Kpi({ titulo, valor, detalle }: { titulo: string; valor: string; detall
   );
 }
 
-export default function Hallazgo({ metricas }: { metricas: MetricaInfo[] }) {
+export default function Hallazgo({ metricas, criterio }: { metricas: MetricaInfo[]; criterio: CriterioDistinto }) {
+  const ic = etiquetaIC(criterio);
   const [metrica, setMetrica] = useState<MetricaId>(metricas[0].id);
   const [datos, setDatos] = useState<Resumen | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -124,28 +131,28 @@ export default function Hallazgo({ metricas }: { metricas: MetricaInfo[] }) {
 
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             <Kpi
-              titulo={`Más alto: ${datos.equipos[0].equipo}`}
+              titulo={`Primero del ranking: ${datos.equipos[0].equipo}`}
               valor={pct(datos.equipos[0].tasa.estimado)}
-              detalle={`IC 95%: ${pct(datos.equipos[0].tasa.ic_inf)}–${pct(datos.equipos[0].tasa.ic_sup)} · n = ${entero(datos.equipos[0].tasa.n)}`}
+              detalle={`${ic}: ${pct(datos.equipos[0].tasa.ic_inf)}–${pct(datos.equipos[0].tasa.ic_sup)} · n = ${entero(datos.equipos[0].tasa.n)}`}
             />
             <Kpi
               titulo="Promedio de la liga"
               valor={pct(datos.liga.estimado)}
-              detalle={`IC 95%: ${pct(datos.liga.ic_inf)}–${pct(datos.liga.ic_sup)} · n = ${entero(datos.liga.n)}`}
+              detalle={`${ic}: ${pct(datos.liga.ic_inf)}–${pct(datos.liga.ic_sup)} · n = ${entero(datos.liga.n)}`}
             />
             <Kpi
               titulo="Equipos distintos de la liga"
               valor={`${datos.equipos.filter((e) => e.distinto_de_liga).length} de ${datos.equipos.length}`}
-              detalle="Con corrección por 32 comparaciones (Benjamini-Hochberg, q < 0.05)"
+              detalle={criterio.texto}
             />
           </div>
 
           <div className="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <h3 className="font-semibold text-slate-900">Ranking de los 32 equipos, con intervalo de confianza al 95%</h3>
+            <h3 className="font-semibold text-slate-900">Ranking de los {datos.equipos.length} equipos, con {ic}</h3>
             <ul className="my-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-700">
               <li><span className="mr-1 inline-block h-3 w-3 align-middle" style={{ background: COLOR_DISTINTO }} />Distinto de la liga</li>
               <li><span className="mr-1 inline-block h-3 w-3 align-middle" style={{ background: COLOR_NORMAL }} />No distinguible de la liga</li>
-              <li><span className="mr-1 inline-block h-3 w-3 align-middle" style={{ background: COLOR_POCOS }} />Pocos datos (n &lt; 30)</li>
+              <li><span className="mr-1 inline-block h-3 w-3 align-middle" style={{ background: COLOR_POCOS }} />Pocos datos</li>
               <li><span className="mr-1 inline-block h-3 w-0 border-l-2 border-dashed align-middle" style={{ borderColor: COLOR_LIGA }} />Liga (franja = su IC)</li>
             </ul>
             <div style={{ height: filas.length * 24 + 60 }}>
@@ -159,7 +166,7 @@ export default function Hallazgo({ metricas }: { metricas: MetricaInfo[] }) {
                     label={{ value: '% de jugadas de pase', position: 'insideBottom', offset: -15 }}
                   />
                   <YAxis type="category" dataKey="equipo" width={44} interval={0} tick={{ fontSize: 12 }} />
-                  <Tooltip content={<Tip />} cursor={{ fill: '#f1f5f9' }} />
+                  <Tooltip content={<Tip total={datos.equipos.length} ic={ic} />} cursor={{ fill: '#f1f5f9' }} />
                   {datos.liga.ic_inf !== null && datos.liga.ic_sup !== null && (
                     <ReferenceArea x1={datos.liga.ic_inf * 100} x2={datos.liga.ic_sup * 100} fill={COLOR_LIGA} fillOpacity={0.15} />
                   )}
@@ -176,21 +183,20 @@ export default function Hallazgo({ metricas }: { metricas: MetricaInfo[] }) {
               </ResponsiveContainer>
             </div>
             <p className="text-sm text-slate-600">
-              Las barras de error son el IC 95% de cada equipo. Si la barra cruza la franja roja, no se puede decir que ese equipo difiera de la liga.
+              Las barras de error son el {ic} de cada equipo; la franja roja es el {ic} de la liga. {criterio.texto}
             </p>
           </div>
 
           <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
             <table className="w-full min-w-[720px] text-left text-sm">
-              <caption className="p-3 text-left font-semibold text-slate-900">Detalle por equipo (cifra, IC 95% y n)</caption>
+              <caption className="p-3 text-left font-semibold text-slate-900">Detalle por equipo (cifra, {ic} y n)</caption>
               <thead className="bg-slate-100 text-slate-700">
                 <tr>
                   <th className="px-3 py-2">#</th>
                   <th className="px-3 py-2">Equipo</th>
                   <th className="px-3 py-2">Tasa</th>
-                  <th className="px-3 py-2">Diferencia vs. liga</th>
-                  <th className="px-3 py-2">q (BH)</th>
-                  <th className="px-3 py-2">¿Distinto?</th>
+                  <th className="px-3 py-2">Diferencia vs. liga (ajustada)</th>
+                  <th className="px-3 py-2">¿Distinto de la liga?</th>
                 </tr>
               </thead>
               <tbody>
@@ -199,11 +205,15 @@ export default function Hallazgo({ metricas }: { metricas: MetricaInfo[] }) {
                     <td className="px-3 py-2">{e.posicion}</td>
                     <td className="px-3 py-2 font-semibold">{e.equipo}</td>
                     <td className="px-3 py-2">
-                      {textoTasa(e.tasa)}
+                      {textoTasa(e.tasa, ic)}
                       {e.tasa.nota && <span className="block font-semibold text-amber-700">⚠ {e.tasa.nota}</span>}
                     </td>
-                    <td className="px-3 py-2">{textoDif(e.diferencia_vs_liga)}</td>
-                    <td className="px-3 py-2">{e.q_bh === null ? 'sin dato' : e.q_bh.toFixed(3)}</td>
+                    <td className="px-3 py-2">
+                      {textoDif(e.diferencia_vs_liga, ic)}
+                      {e.diferencia_vs_liga.nota && (
+                        <span className="block text-xs text-slate-600">{e.diferencia_vs_liga.nota}</span>
+                      )}
+                    </td>
                     <td className="px-3 py-2">{e.distinto_de_liga ? 'Sí' : 'No'}</td>
                   </tr>
                 ))}

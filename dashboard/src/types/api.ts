@@ -1,6 +1,6 @@
 // Copiado de docs/api.md. Si cambia el contrato, cambia aquí también.
 export type MetricaId = 'muestra_no_manda' | 'blitz_escondido' | 'rotacion_cascara';
-export type MetodoEstimacion = 'cluster_bootstrap_partido' | 'estratificada';
+export type MetodoEstimacion = 'cluster_bootstrap_partido' | 'estratificada_cluster_partido_bonferroni';
 
 export interface Estimacion {
   estimado: number | null;
@@ -29,7 +29,17 @@ export interface Meta {
   metricas: MetricaInfo[];
   umbrales: { linea_profundidad_yd: number; linea_ancho_yd: number; safety_profundo_yd: number };
   limitaciones: string[];
+  criterio_distinto: CriterioDistinto;
   generado: string;
+}
+
+// Definición de "distinto de la liga" (de /api/meta): el dashboard no escribe niveles ni textos a mano.
+export interface CriterioDistinto {
+  nivel_ic_mostrado: number;   // 0.95: nivel de ic_inf/ic_sup
+  nivel_ic_decision: number;   // 1 - 0.05/m: decide distinto_de_liga
+  n_comparaciones: number;     // m
+  metodo: 'Bonferroni';
+  texto: string;
 }
 
 export interface EquipoRanking {
@@ -37,8 +47,9 @@ export interface EquipoRanking {
   posicion: number;
   tasa: Estimacion;
   diferencia_vs_liga: Estimacion;
-  q_bh: number | null;
-  distinto_de_liga: boolean;
+  distinto_de_liga: boolean;          // IC de decisión (Bonferroni) sin 0: el ÚNICO indicador de "distinto"
+  q_bh?: number | null;               // orientativo; el dashboard no lo muestra
+  q_bh_nota?: string | null;
 }
 
 export interface Resumen {

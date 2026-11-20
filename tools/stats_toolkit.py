@@ -18,7 +18,7 @@ import pandas as pd
 __all__ = [
     "audit_dataframe", "bootstrap_ci", "cluster_bootstrap_ci", "permutation_test", "cohens_d",
     "wilson_interval", "shrink_rates", "benjamini_hochberg", "ols", "t_crit",
-    "stratified_comparison", "diagnose_relationship",
+    "stratified_comparison", "cluster_bootstrap_stratified_diff", "diagnose_relationship",
     "group_kfold_indices", "time_split", "calibration_table", "brier_score",
 ]
 
@@ -482,6 +482,77 @@ def stratified_comparison(df: pd.DataFrame, treat: str, outcome: str, strata: li
             "estratos_excluidos": excl,
             "pct_filas_excluidas": float(100 * tab.loc[~use, "n"].sum() / tab["n"].sum()),
             "nota": "Ajustado solo por las variables de estrato dadas; confusores no medidos siguen sesgando."}
+
+
+_CACHE_PESOS: dict[tuple[int, int, int], np.ndarray] = {}
+
+
+def _pesos_bootstrap(n_boot: int, n_grupos: int, seed: int) -> np.ndarray:
+    """Matriz (n_boot x n_grupos) de veces que sale cada grupo en cada réplica. Determinista por semilla;
+    se guarda en memoria porque solo depende de (n_boot, n_grupos, seed)."""
+    k = (n_boot, n_grupos, seed)
+    if k not in _CACHE_PESOS:
+        pick = np.random.default_rng(seed).integers(0, n_grupos, size=(n_boot, n_grupos))
+        _CACHE_PESOS[k] = np.bincount((np.arange(n_boot)[:, None] * n_grupos + pick).ravel(),
+                                      minlength=n_boot * n_grupos).reshape(n_boot, n_grupos).astype(float)
+    return _CACHE_PESOS[k]
+
+
+def cluster_bootstrap_stratified_diff(df: pd.DataFrame, treat: str, outcome: str, strata: list[str],
+                                      cluster: str, min_per_arm: int = 5, n_boot: int = 2000,
+                                      alpha: float = 0.05, seed: int = 0,
+                                      alpha_decision: float | None = None) -> dict:
+    """Diferencia ajustada de stratified_comparison con IC por bootstrap de GRUPOS (p. ej. partidos).
+
+    El EE de stratified_comparison supone filas independientes; si las filas se agrupan, ese IC
+    queda demasiado estrecho. Aquí se remuestrean grupos completos y en cada réplica se recalcula
+    la diferencia ponderada (solo en los estratos con solapamiento en los datos originales; en cada
+    réplica entra un estrato si tiene al menos 1 caso de cada opción). Método percentil.
+
+    alpha_decision (opcional): además del IC a nivel 1-alpha, devuelve un IC más exigente con las
+    MISMAS réplicas (p. ej. Bonferroni 0.05/m para m comparaciones). Para colas tan extremas usa
+    n_boot grande (>= 10/(alpha_decision/2) réplicas por cola; p. ej. 20000 para 0.05/32).
+    """
+    strata = list(strata)
+    d = df[[treat, outcome, cluster] + strata].dropna()
+    base = stratified_comparison(d, treat, outcome, strata, min_per_arm=min_per_arm)
+    tab = base["tabla"]
+    usar = tab.loc[(tab["n_opcion1"] >= min_per_arm) & (tab["n_opcion0"] >= min_per_arm), "estrato"].tolist()
+    usar = [k if isinstance(k, tuple) else (k,) for k in usar]
+    clave = pd.MultiIndex.from_frame(d[strata])
+    dentro = clave.isin(usar)
+    d, clave = d[dentro], clave[dentro]
+    s_cod, _ = pd.factorize(clave)
+    g_cod, g_uniq = pd.factorize(d[cluster])
+    G, S = len(g_uniq), int(s_cod.max()) + 1 if len(s_cod) else 0
+    if G < 2 or S == 0:
+        raise ValueError("Se necesitan al menos 2 grupos y 1 estrato con solapamiento.")
+    t = d[treat].to_numpy() == 1
+    y = d[outcome].to_numpy(dtype=float)
+    mats = {}
+    for nombre, m, val in [("s1", t, y), ("n1", t, np.ones_like(y)), ("s0", ~t, y), ("n0", ~t, np.ones_like(y))]:
+        a = np.zeros((G, S))
+        np.add.at(a, (g_cod[m], s_cod[m]), val[m])
+        mats[nombre] = a
+    W = _pesos_bootstrap(n_boot, G, seed)                       # veces que sale cada grupo por réplica
+    S1, N1, S0, N0 = (W @ mats[k] for k in ("s1", "n1", "s0", "n0"))
+    with np.errstate(divide="ignore", invalid="ignore"):
+        dif_s = S1 / N1 - S0 / N0
+        ok = (N1 > 0) & (N0 > 0)
+        peso = np.where(ok, N1 + N0, 0.0)
+        boots = (np.where(ok, dif_s, 0.0) * peso).sum(axis=1) / peso.sum(axis=1)
+    boots = boots[np.isfinite(boots)]
+    lo, hi = np.quantile(boots, [alpha / 2, 1 - alpha / 2])
+    out = {"estimado": base["diferencia_ajustada"], "ic_inf": float(lo), "ic_sup": float(hi),
+           "ee_clasico": base["ee"], "n_filas": int(len(d)), "n_grupos": int(G), "n_boot": n_boot, "nivel": 1 - alpha,
+           "pct_filas_excluidas": base["pct_filas_excluidas"], "estratos_excluidos": base["estratos_excluidos"]}
+    if alpha_decision is not None:
+        dlo, dhi = np.quantile(boots, [alpha_decision / 2, 1 - alpha_decision / 2])
+        out.update(ic_inf_decision=float(dlo), ic_sup_decision=float(dhi), nivel_decision=1 - alpha_decision,
+                   replicas_por_cola=int(round(len(boots) * alpha_decision / 2)))
+    if G < 20:
+        out["advertencia"] = f"solo {G} grupos: el IC puede ser demasiado estrecho; interprétalo con cautela"
+    return out
 
 
 # --------------------------------------------------------------------------- #

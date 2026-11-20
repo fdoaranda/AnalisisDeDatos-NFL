@@ -7,10 +7,10 @@ import resumenMuestra from './mocks/resumen_muestra_no_manda.json';
 import resumenBlitz from './mocks/resumen_blitz_escondido.json';
 import resumenRotacion from './mocks/resumen_rotacion_cascara.json';
 
-// Mocks activos salvo que VITE_USE_MOCKS sea 'false'. Al integrar: VITE_USE_MOCKS=false.
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS !== 'false';
-// Prefijo opcional (vacío = ruta relativa, sin diagonal inicial).
-const BASE = import.meta.env.VITE_API_URL ?? '';
+// Por defecto se usa la API real. Los mocks solo se activan con VITE_USE_MOCKS=true.
+// (Los archivos .env.* no viajan en el zip de --entregar ni en el repo, así que el
+// valor por defecto tiene que ser el de producción.)
+const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
 
 export class ErrorApi extends Error {
   codigo: string;
@@ -38,7 +38,7 @@ async function getJson<T>(ruta: string, mock: () => unknown): Promise<T> {
   }
   let resp: Response;
   try {
-    resp = await fetch(BASE + ruta);
+    resp = await fetch(ruta); // ruta relativa sin diagonal inicial: 'api/...'
   } catch {
     throw new ErrorApi('red', 'No se pudo conectar con el servidor.');
   }

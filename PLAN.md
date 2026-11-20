@@ -30,7 +30,7 @@ _Si es "ejercicios": no se construye frontend; ver sección 9._
      - **"Blitz escondido"** = 4 o menos en la línea al snap y 5 o más atacan. Liga: 751 jugadas [CALCULADO].
   2. **Cáscara: "muestra 2 safeties profundos y rota"** = entre jugadas con 2 safeties profundos al snap, % que juegan Cover-3 o Cover-1.
 - Comparación: cada equipo defensivo (32) contra el resto de la liga, dentro de estratos down × yardas por ganar × formación ofensiva.
-- Población: jugadas de pase de la temporada 2021, semanas 1-8, con snap, sin conversiones de 2 puntos. La cáscara excluye sacks y scrambles porque no tienen frame de pase. **NO aplica a:** carreras, otras temporadas ni a si el disfraz funciona.
+- Población: jugadas de pase de la temporada 2021, semanas 1-8, con snap, sin conversiones de 2 puntos (8,498). La cáscara usa las 3,293 con exactamente 2 safeties profundos al snap; incluye sacks y scrambles porque solo usa el frame del snap y la etiqueta PFF. **NO aplica a:** carreras, otras temporadas ni a si el disfraz funciona.
 
 ## 3. Datos (se llena tras `audit_dataframe`, no antes)
 Detalle completo en `docs/datos.md`.
@@ -61,7 +61,7 @@ Lista de comparaciones/modelos que se van a hacer. Todo lo que se pruebe despué
 
 - Método de incertidumbre: Wilson por equipo; `cluster_bootstrap_ci` por partido para tasas de equipo; `stratified_comparison` (equipo = 1 vs resto = 0) con estratos down × yardas por ganar × formación para la diferencia ajustada; `shrink_rates` para ordenar el ranking.
 - Validación: n/a (análisis descriptivo, no predictivo). Robustez con los puntos 4 y 5.
-- Corrección por pruebas múltiples necesaria: **sí**, `benjamini_hochberg` sobre las 32 comparaciones de cada métrica (3 métricas: muestra y no manda, blitz escondido, rotación de cáscara).
+- Corrección por pruebas múltiples: hay 32 comparaciones por métrica. "Distinto de la liga" = IC por partido de la diferencia ajustada al nivel Bonferroni 1 − 0.05/32 (99.84 %) sin 0 (`cluster_bootstrap_stratified_diff`, 20,000 réplicas). Se muestra el IC 95 %. El q-value de `benjamini_hochberg` queda solo como dato orientativo, porque su error estándar supone jugadas independientes (daba valores como q = 1e-59).
 - Línea base: el promedio de la liga en la misma situación.
 
 ## 5. Alcance MVP (máx. 3 vistas) y fuera de alcance
@@ -137,6 +137,11 @@ No aplica.
 | ~11:10 | Formato: métrica nueva; usuario: coordinador ofensivo | Hugo · Fernando |
 | ~11:10 | Hugo corre `--entregar` y sube el repo | Hugo · Fernando |
 | ~11:15 | Frente con 2 métricas principales: "muestra y no manda" y "blitz escondido"; sin IA por ahora; final 12:50 | Hugo · Fernando |
+| ~11:40 | Precálculo por jugada en `backend/datos/jugadas_disfraz.csv` (`tools/precalcular_jugadas.py`, 39 s); la API lo carga al arrancar. `data/` no va al repo público | Hugo |
+| ~11:40 | Cáscara sin exigir frame de pase (incluye sacks y scrambles): la definición solo usa snap + etiqueta PFF | Hugo |
+| ~11:40 | El título del ranking solo nombra a un equipo si está por encima de la liga | Hugo |
+| ~12:00 | Cifra principal = IC por bootstrap de partidos, también para la diferencia ajustada; q-value solo orientativo | Hugo |
+| ~12:15 | "Distinto de la liga" con IC Bonferroni 99.84 % por métrica. Resultado: solo MIA queda por encima de la liga, y solo en rotación de cáscara | Hugo |
 
 **Análisis exploratorios hechos fuera de la lista declarada (sección 4)**
 - Viabilidad de presión, separación y rotación (`tools/opciones_viables.py`): solo conteos, sin comparar grupos.

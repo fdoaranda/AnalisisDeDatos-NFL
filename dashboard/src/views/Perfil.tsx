@@ -3,8 +3,8 @@ import {
   Bar, BarChart, CartesianGrid, ErrorBar, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts';
 import { ErrorApi, getComparacion } from '../api';
-import { textoDif, textoTasa } from '../format';
-import type { Comparacion, Estimacion, MetricaEquipo } from '../types/api';
+import { etiquetaIC, textoDif, textoTasa } from '../format';
+import type { Comparacion, CriterioDistinto, Estimacion, MetricaEquipo } from '../types/api';
 
 const COLOR_EQUIPO = '#1d4ed8';
 const COLOR_LIGA = '#64748b';
@@ -42,11 +42,13 @@ function veredicto(m: MetricaEquipo): { texto: string; clase: string } {
     : { texto: 'Disfraza menos que la liga', clase: 'text-rose-800' };
 }
 
-export default function Perfil({ equipos, equipo, onEquipo }: {
+export default function Perfil({ equipos, criterio, equipo, onEquipo }: {
   equipos: string[];
+  criterio: CriterioDistinto;
   equipo: string;
   onEquipo: (e: string) => void;
 }) {
+  const ic = etiquetaIC(criterio);
   const [datos, setDatos] = useState<Comparacion | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -98,7 +100,7 @@ export default function Perfil({ equipos, equipo, onEquipo }: {
           <h2 id="titulo-perfil" className="text-2xl font-bold leading-tight text-slate-900 md:text-3xl">{datos.titulo}</h2>
 
           <div className="mt-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            <h3 className="font-semibold text-slate-900">{datos.equipo} contra la liga, con intervalo de confianza al 95%</h3>
+            <h3 className="font-semibold text-slate-900">{datos.equipo} contra la liga, con {ic}</h3>
             <div className="mt-2 h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={filas} margin={{ top: 10, right: 16, bottom: 5, left: 8 }}>
@@ -124,7 +126,7 @@ export default function Perfil({ equipos, equipo, onEquipo }: {
               </ResponsiveContainer>
             </div>
             <p className="text-sm text-slate-600">
-              Las líneas negras son el IC 95%. Si las barras de error de {datos.equipo} y la liga se traslapan, la diferencia puede ser ruido.
+              Las líneas negras son el {ic}. {criterio.texto}
             </p>
           </div>
 
@@ -138,19 +140,22 @@ export default function Perfil({ equipos, equipo, onEquipo }: {
                   <dl className="mt-3 space-y-2 text-sm text-slate-800">
                     <div>
                       <dt className="font-medium text-slate-600">{datos.equipo}</dt>
-                      <dd>{textoTasa(m.equipo)}</dd>
+                      <dd>{textoTasa(m.equipo, ic)}</dd>
                       {m.equipo.nota && <dd className="font-semibold text-amber-700">⚠ {m.equipo.nota}</dd>}
                     </div>
                     <div>
                       <dt className="font-medium text-slate-600">Liga</dt>
-                      <dd>{textoTasa(m.liga)}</dd>
+                      <dd>{textoTasa(m.liga, ic)}</dd>
                     </div>
                     <div>
-                      <dt className="font-medium text-slate-600">Diferencia</dt>
-                      <dd>{textoDif(m.diferencia_vs_liga)}</dd>
+                      <dt className="font-medium text-slate-600">Diferencia (ajustada)</dt>
+                      <dd>{textoDif(m.diferencia_vs_liga, ic)}</dd>
+                      {m.diferencia_vs_liga.nota && (
+                        <dd className="text-xs text-slate-600">{m.diferencia_vs_liga.nota}</dd>
+                      )}
                     </div>
                     <div>
-                      <dt className="font-medium text-slate-600">Lugar entre los 32 equipos</dt>
+                      <dt className="font-medium text-slate-600">Lugar entre los {equipos.length} equipos</dt>
                       <dd>{m.posicion}</dd>
                     </div>
                   </dl>
