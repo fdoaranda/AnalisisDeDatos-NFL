@@ -43,3 +43,11 @@ INFO:     127.0.0.1:57515 - "GET /api/resumen?metrica=rotacion_cascara HTTP/1.1"
 INFO:     127.0.0.1:57516 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57517 - "GET /api/resumen?metrica=blitz_escondido HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57518 - "GET /api/comparacion?equipo=MIA HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55574 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55575 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55576 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55577 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60141 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60142 - "GET /api/meta HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60143 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60144 - "GET /api/resumen?metrica=muestra_no_manda HTTP/1.1" 200 OK
