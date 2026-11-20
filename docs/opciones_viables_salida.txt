@@ -1,0 +1,140 @@
+jugadas totales: 8557 | sin 2pt: 8522
+
+==========================================================================================
+OPCIÓN 1: PRESIÓN (distancia rusher-QB, snap -> pase/sack)
+==========================================================================================
+jugadas con snap, QB y >=1 rusher medidos, dur>0: 8497 de 8522
+
+Cómo termina la ventana (src_end) por passResult (n jugadas):
+passResult       C     I   IN    R    S
+src_end                                
+pase          4584  2733  189   12   30
+sack             0     0    0    0  487
+ultimo_frame     2     1    0  435   24
+
+Duración snap->fin (frames; 10 fps [SUPUESTO]) cuantiles pooled: {0.05: 18.0, 0.25: 23.0, 0.5: 29.0, 0.75: 36.0, 0.95: 55.0}
+n_rush (pff_role=Pass Rush) por jugada: {1: 2, 2: 15, 3: 419, 4: 5969, 5: 1675, 6: 347, 7: 69, 8: 1}
+
+Grupos:  {'4': 5969, '5+': 2092, '<=3': 436}
+Evento 'rusher a <=2 yd del QB antes del fin' (conteos) por grupo:
+           n  eventos  partidos  equipos_of
+g_rush                                     
+4       5969     2075       122          32
+5+      2092      820       122          32
+<=3      436       97       111          32
+
+Cobertura tipo x grupo de rushers (conteos):
+g_rush                   4    5+  <=3
+pff_passCoverageType                 
+Man                   1282  1061  117
+Other                  343    78   49
+Zone                  4344   953  270
+
+Presión PFF (algún hit/hurry/sack) por grupo (conteos):
+pres_pff  False  True 
+g_rush                
+4          3904   2065
+5+         1105    987
+<=3         339     97
+
+Validación pooled: evento medido vs presión PFF (conteos):
+pres_pff  False  True 
+evento                
+0          4694    811
+1           654   2338
+
+Distancia mínima rusher-QB al fin de ventana (yd), cuantiles pooled: {0.05: 0.76, 0.5: 2.73, 0.95: 5.24}
+
+Solapamiento 5+ rushers (1) vs 4 (0) n1= 2092 n0= 5969
+   estr. down: celdas=4, usables=4, filas excluidas=0 de 8061, n1 usado=2092, n0 usado=5969
+   estr. down x formación: celdas=16, usables=14, filas excluidas=18 de 8061, n1 usado=2081, n0 usado=5962
+   estr. down x formación x yardas: celdas=44, usables=28, filas excluidas=148 de 8061, n1 usado=2042, n0 usado=5871
+   estr. ... x tipo cobertura: celdas=124, usables=50, filas excluidas=505 de 8061, n1 usado=1969, n0 usado=5587
+
+==========================================================================================
+OPCIÓN 2: SEPARACIÓN DEL RECEPTOR OBJETIVO AL SOLTAR
+==========================================================================================
+pases C/I/IN (sin 2pt): 7531 {'C': 4602, 'I': 2739, 'IN': 190}
+playDescription con patrón ' to X.Apellido': 6964 | sin patrón: 567
+coincidencia con jugadores ofensivos en el frame del pase (n_match):  {-1: 3, 0: 584, 1: 6944} (-1 = sin evento de pase; 0 = sin coincidencia; 1 = único; >1 = ambiguo)
+
+ANÁLISIS: pases con objetivo único y separación medida: 6944 de 7531 pases C/I/IN
+por passResult: {'C': 4507, 'I': 2436, 'IN': 1} | partidos: 122 | equipos defensivos: 32
+
+Separación (yd) cuantiles pooled: {0.05: 0.86, 0.25: 1.8, 0.5: 3.37, 0.75: 5.18, 0.95: 8.31}
+
+Posición del objetivo (officialPosition): {'WR': 4196, 'TE': 1524, 'RB': 1163, 'FB': 56, 'QB': 4, 'G': 1}
+
+tipo cobertura x completo (conteos):
+completo                 0     1
+pff_passCoverageType            
+Man                    883  1125
+Other                  138   203
+Zone                  1416  3179
+
+profundidad x completo (conteos):
+completo     0     1
+prof_cat            
+<=5         56   268
+5-15      1059  2807
+>15       1322  1432
+
+Solapamiento completo (1) vs no completo (0):
+   estr. tipo cobertura: celdas=3, usables=3, filas excluidas=0 de 6944, n1 usado=4507, n0 usado=2437
+   estr. tipo cobertura x profundidad: celdas=9, usables=9, filas excluidas=0 de 6944, n1 usado=4507, n0 usado=2437
+   estr. ... x down: celdas=36, usables=26, filas excluidas=96 de 6944, n1 usado=4430, n0 usado=2418
+
+QBs con >=1 pase analizable: 57 | con >=30: 39 | con >=100: 33 | máx: 278 | mediana: 137.0
+Objetivos distintos: 414 | con >=30 blancos: 79 | con >=50: 30 | máx: 80
+
+==========================================================================================
+OPCIÓN 3: ROTACIÓN DE SAFETIES ENTRE EL SNAP Y EL PASE
+==========================================================================================
+jugadas con >=1 safety medido al snap: 8067 | con evento de pase (deep_pase medido): 7167
+ANÁLISIS: con snap, pase, y mismos safeties en ambos frames: 7167
+frames snap->pase cuantiles: {0.05: 18.0, 0.25: 23.0, 0.5: 27.0, 0.75: 34.0, 0.95: 49.0}
+nº de safeties: {1.0: 3339, 2.0: 3471, 3.0: 252, 4.0: 74, 5.0: 19, 6.0: 12}
+
+Cáscara al snap (nº de safeties a >=10 yd del balón): {0.0: 315, 1.0: 3795, 2.0: 2907, 3.0: 104, 4.0: 26, 5.0: 10, 6.0: 10}
+
+Transición cáscara snap (filas) x cáscara al pase (columnas), conteos:
+deep_pase  0.0   1.0   2.0  3.0  4.0  5.0  6.0
+deep_snap                                     
+0.0        110   183    22    0    0    0    0
+1.0         70  3279   434   12    0    0    0
+2.0          4   345  2428  111   19    0    0
+3.0          0     0     4   77   21    2    0
+4.0          0     0     0    1   22    3    0
+5.0          0     0     0    0    0    9    1
+6.0          0     0     0    0    0    0   10
+
+Grupos por cáscara al snap, con eventos 'cambió nº de safeties profundos' (conteos):
+           n  cambios  partidos  equipos_def
+shell                                       
+1-alto  3795      516       122           32
+2-alto  2907      479       122           32
+otra     465      237       119           32
+
+Cobertura PFF x cáscara al snap (conteos):
+shell             1-alto  2-alto  otra
+pff_passCoverage                      
+2-Man                 36     120     5
+Bracket               14      16     3
+Cover-0               56      14    23
+Cover-1             1240     396    90
+Cover-2              353     562    54
+Cover-3             1607     621   108
+Cover-6              180     533     9
+Miscellaneous          3       1     1
+Prevent                0       3    26
+Quarters             230     617    37
+Red Zone              76      24   109
+
+Solapamiento 2-alto (1) vs 1-alto (0): n1= 2907 n0= 3795
+   estr. down: celdas=4, usables=4, filas excluidas=0 de 6702, n1 usado=2907, n0 usado=3795
+   estr. down x formación: celdas=16, usables=13, filas excluidas=35 de 6702, n1 usado=2906, n0 usado=3761
+   estr. down x formación x yardas: celdas=38, usables=24, filas excluidas=106 de 6702, n1 usado=2886, n0 usado=3710
+   estr. ... x play action: celdas=64, usables=33, filas excluidas=165 de 6702, n1 usado=2870, n0 usado=3667
+Jugadas por equipo defensivo (min/mediana/max): [172.0, 209.5, 265.0]
+
+OK fin

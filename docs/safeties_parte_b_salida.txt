@@ -1,0 +1,117 @@
+filas jugador-jugada con ventana incompleta (<6 frames) que se EXCLUYEN: 283 | en jugadas: 41
+================================================================================ 
+VENTANA Y COBERTURA DEL SNAP
+ ================================================================================
+jugadas en tracking: 8557 | con snap (manual o auto): 8533 | sin snap: 24
+jugadas con snap en frame < 6 (no hay 5 frames previos): 41
+jugadas con snap en frame >= 6: 8492
+frames de ventana por jugador (n_frames): {6: 55375}
+
+ ================================================================================ 
+SAFETIES POR JUGADA (pff_role=Coverage y posición en ['FS', 'FSL', 'FSR', 'SS', 'SSL', 'SSR'] )
+ ================================================================================
+jugadas con >=1 safety y ventana completa: 8042
+distribución de nº de safeties por jugada: {1: 3728, 2: 3916, 3: 282, 4: 81, 5: 22, 6: 13}
+
+ ================================================================================ 
+RUIDO DE MEDICIÓN (todas las jugadas juntas, sin separar por cobertura)
+ ================================================================================
+Desplazamiento neto en 5 frames, yardas [CALCULADO] (linieros ofensivos = referencia casi inmóvil):
+        OL  safeties
+0.50  0.04      0.28
+0.90  0.13      0.85
+0.95  0.17      1.12
+0.99  0.27      1.66
+n filas jugador-jugada: OL 42457 | safeties 12918
+Camino recorrido en 5 frames (yardas):
+        OL  safeties
+0.50  0.05      0.29
+0.90  0.14      0.85
+0.95  0.18      1.12
+0.99  0.28      1.67
+safeties con desplazamiento > 0.5 yd: 3562 de 12918 | OL con > 0.5 yd: 44 de 42457
+safeties con desplazamiento > 1 yd: 867 de 12918 | OL con > 1 yd: 5 de 42457
+safeties con desplazamiento > 2 yd: 48 de 12918 | OL con > 2 yd: 0 de 42457
+safeties con desplazamiento > 3 yd: 1 de 12918 | OL con > 3 yd: 0 de 42457
+
+ ================================================================================ 
+TAMAÑO DE GRUPOS POR COBERTURA
+ ================================================================================
+pff_passCoverage pff_passCoverageType  jugadas_sin_2pt  validas  partidos  equipos_def
+           2-Man                  Man              200      196        76           30
+         Bracket                Other               47       39        29           17
+         Cover-0                  Man              260      102        58           26
+         Cover-1                  Man             2005     1956       122           32
+         Cover-2                 Zone             1085     1064       118           32
+         Cover-3                 Zone             2664     2601       122           32
+         Cover-6                 Zone              805      789       117           32
+       Goal Line                Other               25        0         0            0
+   Miscellaneous                Other                8        8         7            7
+         Prevent                Other               32       31        23           18
+        Quarters                 Zone             1033      997       119           32
+        Red Zone                Other              358      246       100           32
+TOTAL válidas: 8029 de 8522 jugadas sin 2pt
+Pérdida por ventana/snap/safeties: 493
+
+Grupos candidatos (jugadas válidas):
+comparador
+Otra zona (C2/C4/C6)            2850
+Cover-3                         2601
+Cover-1                         1956
+Otra (0, 2-Man, situacional)     622
+
+Cover-3 válidas: partidos 122 | equipos defensivos 32 | jugadas por equipo defensivo (min/mediana/max): [40.0, 78.5, 167.0]
+
+ ================================================================================ 
+FORMACIÓN DE LA 'CÁSCARA' AL SNAP: nº de safeties a >=10 yd del balón (n_prof10) por cobertura (conteos)
+ ================================================================================
+n_prof10          0.0   1.0  2.0  3.0  4.0  5.0  6.0
+pff_passCoverage                                    
+2-Man               2    43  146    5    0    0    0
+Bracket             5    15   18    1    0    0    0
+Cover-0            25    59   17    1    0    0    0
+Cover-1            91  1379  478    7    0    1    0
+Cover-2            10   388  617   35   11    3    0
+Cover-3            63  1787  690   49    7    3    2
+Cover-6             6   206  573    4    0    0    0
+Miscellaneous       2     3    3    0    0    0    0
+Prevent             0     0    3    8    7    5    8
+Quarters           30   259  696    6    3    2    1
+Red Zone          128    87   31    0    0    0    0
+
+ ================================================================================ 
+SUBGRUPOS DENTRO DE COVER-3 SEGÚN UMBRAL DE MOVIMIENTO (max desplazamiento de un safety)
+ ================================================================================
+umbral 0.5 yd: movió n=1025 | no movió n=1576 | equipos def. con >=1 movió: 32 | partidos: 122
+umbral 1 yd: movió n=282 | no movió n=2319 | equipos def. con >=1 movió: 32 | partidos: 100
+umbral 2 yd: movió n=21 | no movió n=2580 | equipos def. con >=1 movió: 14 | partidos: 18
+umbral 3 yd: movió n=1 | no movió n=2600 | equipos def. con >=1 movió: 1 | partidos: 1
+
+ ================================================================================ 
+SOLAPAMIENTO DE ESTRATOS (solo conteos; regla de stratified_comparison: >=5 por brazo)
+ ================================================================================
+
+--- Cover-3 (1) vs Cover-1 (0): n1=2601, n0=1956
+estr. down | estratos=['down']: celdas=4, usables=4, filas excluidas=0 de 4557 (0.0%), n1 usado=2601 n0 usado=1956
+estr. down x formación | estratos=['down', 'form3']: celdas=16, usables=14, filas excluidas=13 de 4557 (0.3%), n1 usado=2595 n0 usado=1949
+estr. down x formación x yardas | estratos=['down', 'form3', 'ytg']: celdas=41, usables=27, filas excluidas=63 de 4557 (1.4%), n1 usado=2567 n0 usado=1927
+estr. ... x zona | estratos=['down', 'form3', 'ytg', 'zona_campo']: celdas=92, usables=36, filas excluidas=214 de 4556 (4.7%), n1 usado=2489 n0 usado=1853
+
+--- Cover-3 (1) vs Otra zona (C2/C4/C6) (0): n1=2601, n0=2850
+estr. down | estratos=['down']: celdas=4, usables=4, filas excluidas=0 de 5451 (0.0%), n1 usado=2601 n0 usado=2850
+estr. down x formación | estratos=['down', 'form3']: celdas=16, usables=14, filas excluidas=7 de 5451 (0.1%), n1 usado=2595 n0 usado=2849
+estr. down x formación x yardas | estratos=['down', 'form3', 'ytg']: celdas=40, usables=24, filas excluidas=87 de 5451 (1.6%), n1 usado=2544 n0 usado=2820
+estr. ... x zona | estratos=['down', 'form3', 'ytg', 'zona_campo']: celdas=84, usables=36, filas excluidas=179 de 5451 (3.3%), n1 usado=2488 n0 usado=2784
+
+--- Dentro de Cover-3: 'movió > 1 yd' (1) vs 'no movió' (0): n1= 282 n0= 2319
+estr. down | estratos=['down']: celdas=4, usables=3, filas excluidas=50 de 2601 (1.9%), n1 usado=280 n0 usado=2271
+estr. down x formación | estratos=['down', 'form3']: celdas=16, usables=10, filas excluidas=74 de 2601 (2.8%), n1 usado=278 n0 usado=2249
+estr. down x formación x yardas | estratos=['down', 'form3', 'ytg']: celdas=40, usables=16, filas excluidas=194 de 2601 (7.5%), n1 usado=271 n0 usado=2136
+
+ ================================================================================ 
+RESULTADO (variable de desenlace): conteos disponibles en Cover-3 válidas
+ ================================================================================
+passResult: {'C': 1524, 'I': 742, 'S': 152, 'R': 132, 'IN': 51}
+jugadas con dropBackType nulo: 137
+
+OK fin
